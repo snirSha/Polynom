@@ -16,4 +16,3 @@ public interface function extends Serializable{
 }
 
 
-// hello my name is snir
