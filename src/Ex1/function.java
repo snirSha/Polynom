@@ -14,3 +14,6 @@ public interface function extends Serializable{
 	public function copy(); // clone
 	public boolean equals(Object obj);
 }
+
+
+// hello my name is snir
