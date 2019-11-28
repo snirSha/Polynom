@@ -13,6 +13,8 @@ public interface function extends Serializable{
 	public function initFromString(String s);
 	public function copy(); // clone
 	public boolean equals(Object obj);
+	
+	// snir a gay
 }
 
 
