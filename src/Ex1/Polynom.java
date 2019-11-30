@@ -183,6 +183,9 @@ public class Polynom implements Polynom_able {
 	 * Check if tow Polynoms are equale, return the difference between the powers.
 	 */
 	public boolean equals(Object p1) {
+		if(!(p1 instanceof Polynom)) {
+			return false;
+		}
 		Iterator<Monom> iter1 = this.iteretor();
 		Iterator<Monom> iter2 = ((Polynom_able) p1).iteretor();
 

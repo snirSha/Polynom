@@ -286,16 +286,27 @@ public class Monom implements function{
 		return Math.abs(this._coefficient - m._coefficient) <= EPSILON && this._power == m._power;
 	}
 
+	/**
+	 * @return f = return new Monom with the s string  
+	 */
 	@Override
 	public function initFromString(String s) {
-		// TODO Auto-generated method stub
+		try {
+		function f=new Monom(s);
+		return f;
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return null;
 	}
 
+	/**
+	 * return f = new Monom(other Monom) 
+	 */
 	@Override
 	public function copy() {
-		// TODO Auto-generated method stub
-		return null;
+		function f=new Monom(this._coefficient,this.get_power());
+		return f;
 	}
 
 
