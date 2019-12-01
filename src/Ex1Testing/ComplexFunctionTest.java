@@ -15,20 +15,25 @@ class ComplexFunctionTest {
 	public static final double EPS = 0.00001;
 	@Test
 	void test() {
-		Monom m1 = new Monom(2,2);//2x^2
-		Monom m2 = new Monom(3,3);//3x^3
-		ComplexFunction cf = new ComplexFunction("plus", m1, m2);//3x^3 + 2x^2
-	//	System.out.println(cf);
-		cf.mul(m2);
-		System.out.println(cf);//9x^6 + 6x^5
+		Monom m1 = new Monom(2,2);//2.0x^2
+		Monom m2 = new Monom(3,3);//3.0x^3
+		ComplexFunction cf = new ComplexFunction("plus", m1, m2);//Plus(3x^3 , 2x^2)
+		//System.out.println(cf);
+		cf.mul(m2);//Times(Plus(3x^3 , 2x^2),3.0x^3)
 		Polynom p = new Polynom();
-		p.add(m1);
-		p.add(m2);
-		p.multiply(m2);//9x^6 + 6x^5
+		p.add(m1);//2.0x^2
+		p.add(m2);//3.0x^3
+		
+		System.out.println("!!!!!!!!m1=="+m1.toString());
+		System.out.println("!!!!!!!!m2=="+m2.toString());
+		p.multiply(m2);//(2x^2 + 3x^3)*3.0x^3
+		System.out.println("!!!!!!!!m1=="+m1.toString());
+		System.out.println("!!!!!!!!m2=="+m2.toString());
+
 		double v = 4.0;
 		double dp = p.f(v);//43008
 		double dcf = cf.f(v);//43008
-		double dd = Math.abs(dp-dcf);//0
+		double dd = Math.abs(dp-dcf);
 		if(dd>EPS) {
 			System.out.println(p+" at "+v+" = "+dp);
 			System.out.println(cf+" at "+v+" = "+dcf);
@@ -37,7 +42,7 @@ class ComplexFunctionTest {
 		}
 	}
 
-		@Test
+		/*@Test
 		void testOfString() {
 			Polynom p1 = new Polynom();
 			p1.add( new Monom(2,2));//2x^2
@@ -58,9 +63,9 @@ class ComplexFunctionTest {
 			if(!cf.equals(cf3)) {
 				fail("ERR: "+cf+" should be equals to "+cf3);
 			}
-	}
+	}*/
 		
-	@Test
+	/*@Test
 	void testComplexFunction() throws Exception {
 		String s1 = "3.1 +2.4x^2 -x^4";
 		String s2 = "5 +2x -3.3x +0.1x^5";
@@ -88,5 +93,5 @@ class ComplexFunctionTest {
 		}
 		System.out.println(cf4);
 		System.out.println(cf5);
-	}
+	}*/
 }

@@ -24,7 +24,7 @@ public class Polynom implements Polynom_able {
 	/**
 	 * poly is an ArrayList who holds Monoms
 	 */
-
+	public static final double EPS = 0.00001;
 	ArrayList<Monom> poly;
 
 	/**
@@ -110,7 +110,7 @@ public class Polynom implements Polynom_able {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		this.poly.add(m1);
+		this.poly.add(new Monom(m1));
 		Monom_Comperator s_c = new Monom_Comperator();
 		this.poly.sort(s_c);
 	}
@@ -145,12 +145,12 @@ public class Polynom implements Polynom_able {
 	 * Substract Polynom p1 from the Polynom
 	 */
 	public void substract(Polynom_able p1) {
-		Iterator<Monom> it=p1.iteretor(); 
-		while(it.hasNext()) {
-			Monom tmp=it.next();
-			this.add(new Monom(-1*tmp.get_coefficient(),tmp.get_power()));
+		Iterator<Monom> iter = p1.iteretor();
+		while (iter.hasNext()) {
+			Monom runner = iter.next();
+			this.add(new Monom(0 - runner.get_coefficient(), runner.get_power()));
 		}
-		this.remove_Zeroes();
+		remove_Zeroes();
 	}
 
 	///////////////////////////////////////////////////////////////////////
@@ -173,7 +173,6 @@ public class Polynom implements Polynom_able {
 		}
 		this.poly = tmp.poly;
 		poly.sort(new Monom_Comperator());
-
 	}
 
 
@@ -192,7 +191,7 @@ public class Polynom implements Polynom_able {
 		while (iter1.hasNext() && iter2.hasNext()) {
 			Monom tmp1 = iter1.next();
 			Monom tmp2 = iter2.next();
-			if ((tmp1.get_coefficient() != tmp2.get_coefficient()) || (tmp1.get_power() != tmp2.get_power()))
+			if ((Math.abs(tmp1.get_coefficient()- tmp2.get_coefficient())>EPS) || (tmp1.get_power() != tmp2.get_power()))
 				return false;
 		}
 		return true;
@@ -281,13 +280,14 @@ public class Polynom implements Polynom_able {
 	 * calculate the area between the function and the x line
 	 */
 	public double area(double x0, double x1, double eps) {
-		if(x0>=x1)
-			return 0;
-		double sum=0;
-		for(double i=x0; i<x1; i+=eps) {
-			sum+=f(i)*eps;
+		double ans = 0;
+		double i = 0;
+		for (i = x0; i < x1; i = i + eps) {
+			double y = i + (eps / 2);
+			if (f(y) > 0)
+				ans = ans + (f(y) * eps);
 		}
-		return sum;
+		return ans;
 	}
 	/////////////////////////////////////////////////////////////////////////
 	@Override
@@ -305,18 +305,21 @@ public class Polynom implements Polynom_able {
 	 */
 	public void multiply(Monom m1) {
 		Polynom tmp=new Polynom();
+
 		if(m1.get_coefficient()==0)
 			this.poly.clear();
-
 		else {
 			Iterator<Monom> it=this.iteretor();
+			Monom ttt=new Monom(m1);
 			Monom t;
 			while(it.hasNext()) {
 				t=it.next();
-				t.multipy(m1);
+				t.multipy(ttt);
 				tmp.add(t);
-			}
+				m1=ttt;
+			}	
 		}
+		
 		this.poly = tmp.poly;
 		this.remove_Zeroes();
 		poly.sort(new Monom_Comperator());
@@ -363,7 +366,7 @@ public class Polynom implements Polynom_able {
 
 	@Override
 	public function initFromString(String s) {
-		// TODO Auto-generated method stub
-		return null;
+		function f=new Polynom(s);
+		return f;
 	}
 }
