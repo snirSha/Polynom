@@ -24,11 +24,7 @@ class ComplexFunctionTest {
 		p.add(m1);//2.0x^2
 		p.add(m2);//3.0x^3
 		
-		System.out.println("!!!!!!!!m1=="+m1.toString());
-		System.out.println("!!!!!!!!m2=="+m2.toString());
 		p.multiply(m2);//(2x^2 + 3x^3)*3.0x^3
-		System.out.println("!!!!!!!!m1=="+m1.toString());
-		System.out.println("!!!!!!!!m2=="+m2.toString());
 
 		double v = 4.0;
 		double dp = p.f(v);//43008
@@ -42,7 +38,7 @@ class ComplexFunctionTest {
 		}
 	}
 
-		/*@Test
+		@Test
 		void testOfString() {
 			Polynom p1 = new Polynom();
 			p1.add( new Monom(2,2));//2x^2
@@ -50,22 +46,22 @@ class ComplexFunctionTest {
 			p2.add(new Monom(3,3));//3x^3
 			Monom m1 = new Monom(2,2);//2x^2
 			Monom m2 = new Monom(3,3);//3x^3
-			ComplexFunction cf = new ComplexFunction("plus", m1,m2);//3.0x^3 , 2.0x^2
-			ComplexFunction cf3 = new ComplexFunction("plus", p1,p2);//3.0x^3 , 2.0x^2
-			//System.out.println(cf);
-			cf.mul(m2);//9x^6 + 6x^5
-			cf3.mul(m2);//9x^6 + 6x^5
-			String s = cf.toString();
-			function cf2 = cf.initFromString(s);//9x^6 + 6x^5
+			ComplexFunction cf = new ComplexFunction("plus", m1,m2);//Plus(2.0x^2 , 3.0x^3)
+			ComplexFunction cf3 = new ComplexFunction("plus", p1,p2);//Plus(2.0x^2 , 3.0x^3)
+//			System.out.println(cf);
+			cf.mul(m2);//Times(Plus(2.0x^2 , 3.0x^3) , 3.0x^3)
+			cf3.mul(m2);//Times(Plus(2.0x^2 , 3.0x^3) , 3.0x^3)
+		    String s = cf.toString();
+			function cf2 = cf.initFromString(s);
 			if(!cf.equals(cf2)) {
 				fail("ERR: "+cf+" should be equals to "+cf2);
 			}
 			if(!cf.equals(cf3)) {
 				fail("ERR: "+cf+" should be equals to "+cf3);
 			}
-	}*/
+	}
 		
-	/*@Test
+	@Test
 	void testComplexFunction() throws Exception {
 		String s1 = "3.1 +2.4x^2 -x^4";
 		String s2 = "5 +2x -3.3x +0.1x^5";
@@ -93,5 +89,5 @@ class ComplexFunctionTest {
 		}
 		System.out.println(cf4);
 		System.out.println(cf5);
-	}*/
+	}
 }
