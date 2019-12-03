@@ -182,40 +182,25 @@ public class ComplexFunction implements complex_function {
 		ans.append(this.p+"("+this.left.toString()+" , "+this.right.toString()+")");
 		return ans.toString();
 	}
+
+	/*
+	 * Times(2x,x)==plus(x^2,x^2)
+	 * 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ComplexFunction))
 			return false;
 
 		ComplexFunction other = (ComplexFunction) obj;
-				
-		if(this.right==null && other.right==null) {
-			return this.left.equals(other.left);
-		}
-		
-		if(this.left==null || this.right==null) {
-			return false;
-		}
-		
-		String tmp=recursiveLeft(other.left.toString());
-		String newLeft=recursiveLeft(this.left.toString());
-		Polynom otherLeft=new Polynom(tmp);
-		Polynom pLeft=new Polynom(newLeft);
-		Polynom pRight=new Polynom(this.right.toString());
-		Polynom otherRight=new Polynom(other.right.toString());
-	
-		return (pLeft.equals(otherLeft)) && (pRight.equals(otherRight)) && (this.p.equals(other.p));
-	}
 
-	//// private methods ////
-	private String recursiveLeft(String s) {
-		if(s.indexOf(',')==-1)
-			return s;
-		int ind1=s.indexOf('(');
-		int ind2=s.indexOf(',');
-		String ans=s.substring(ind1+1, ind2);
-		return recursiveLeft(ans);
+		for (int i = 1; i <=10; i++) {
+			if(this.f(i)!=other.f(i))
+				return false;
+		}
+		return true;
 	}
+	//// private methods ////
 	
 	private void makeComplex(function f1) {
 		ComplexFunction tmp = new ComplexFunction(this.p,this.left,this.right);
