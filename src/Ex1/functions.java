@@ -6,7 +6,7 @@ package Ex1;
 import java.io.IOException;
 import java.util.Collection;
 
-public interface functions extends Collection<functions>{
+public interface functions extends Collection<function>{
 	/**
 	 * Init a new collection of functions from a file
 	 * @param file - the file name

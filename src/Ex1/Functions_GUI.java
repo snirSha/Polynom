@@ -4,88 +4,95 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 public class Functions_GUI implements functions{
-	List<functions> list = new ArrayList<functions>();
+	public ArrayList<function> list = new ArrayList<function>();
 
 	@Override
-	public boolean add(functions e) {
-		// TODO Auto-generated method stub
-		return list.add(e);
+	public boolean add(function e) {
+		if(contains(e))return false;
+		return this.list.add(e);
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends functions> c) {
-		// TODO Auto-generated method stub
-		return list.addAll(c);
+	public boolean addAll(Collection<? extends function> c) {
+		return this.list.addAll(c);
 	}
 
 	@Override
 	public void clear() {
-		list.clear();
+		this.list.clear();
 		
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		return list.contains(o);
+		return this.list.contains(o);
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		return list.containsAll(c);
+		return this.list.containsAll(c);
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return list.isEmpty();
+		return this.list.isEmpty();
 	}
 
 	@Override
-	public Iterator<functions> iterator() {
-		return list.iterator();
+	public Iterator<function> iterator() {
+		return this.list.iterator();
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		return list.remove(o);
+		return this.list.remove(o);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		return list.removeAll(c);
+		return this.list.removeAll(c);
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		return list.retainAll(c);
+		return this.list.retainAll(c);
 	}
 
 	@Override
 	public int size() {
-		return list.size();
+		return this.list.size();
 	}
 
 	@Override
 	public Object[] toArray() {
-		return list.toArray();
+		return this.list.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		return list.toArray(a);
+		return this.list.toArray(a);
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < this.size(); i++) {
+			sb.append(this.list.get(i).toString());
+			if(i < size() - 1) sb.append(", ");
+		}
+		return sb.toString();
 	}
 
 	@Override
 	public void initFromFile(String file) throws IOException {
-		String s = FileUtils.readFile("test.txt");
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void saveToFile(String file) throws IOException {
-		FileUtils.writeFile("functions.txt", file);
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -101,4 +108,5 @@ public class Functions_GUI implements functions{
 		
 	}
 
+	
 }
