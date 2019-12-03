@@ -3,26 +3,38 @@ package Ex1;
 
 public class ComplexFunction implements complex_function {
 
-
 	private function left;
 	private function right;
 	private Operation p;
 
+	public ComplexFunction(function f) {
+		this.left=f;
+	}
+	
 	public ComplexFunction(Operation p , function f1, function f2) {
+		if(f2!=null) {
+			this.p=p;
+		}
+		else if(f2==null) {
+			this.p=Operation.None;
+		}
 		this.left=f1;
 		this.right=f2;
-		this.p=p;
 	}
 
 	public ComplexFunction(String str, function p1, function p2) {
-		this.left = p1;
-		this.right = p2;
-		this.p = fromStringToOperator(str);
+		if(p2!=null) {
+			this.p = fromStringToOperator(str);			
+		}
+		else if(p2==null) {
+			this.p=Operation.None;
+		}
+		this.left=p1;
+		this.right=p2;
 	}
 
 	@Override
 	public double f(double x) {
-
 		//	Plus, Times, Divid, Max, Min, Comp , None, Error
 		double ans = 0;
 		
@@ -52,11 +64,11 @@ public class ComplexFunction implements complex_function {
 			break;
 
 		case None:
-			ans = -1;
+			ans= this.left.f(x);
 			break;
-
+			
 		case Error:
-			throw new IllegalArgumentException("The string is wrong!");
+			throw new IllegalArgumentException("Wrong value!");
 		
 		default:
 			throw new IllegalArgumentException("The string is wrong!");
@@ -94,6 +106,9 @@ public class ComplexFunction implements complex_function {
 		case "comp":
 			return Operation.Comp;
 
+		case "none":
+			return Operation.None;
+			
 		default:
 			throw new RuntimeException("bad operation");
 		}
@@ -102,20 +117,33 @@ public class ComplexFunction implements complex_function {
 
 	@Override
 	public function initFromString(String s) {
+		if(!isBalanced(s))
+			throw new IllegalArgumentException("The delimiters are incorrect");
+
 		if(s.indexOf('(')==-1) {
 			 function f=new Polynom(s);
 			 return f;
 		}
 		int ind1 = s.indexOf('(');
-		int ind2 = s.lastIndexOf(',');
+		int ind2 = s.indexOf(',');
+		int indLast2=s.lastIndexOf(','); 
 		int ind3 = s.lastIndexOf(')');
+		
+		String rig="",lef="";
+		
+		if(s.charAt(ind2+2)<='z'&&s.charAt(ind2+2)>='A') {
+			rig = s.substring((ind2+2), ind3);
+			lef = s.substring(ind1+1, ind2);
+		}
+		else {
+			rig= s.substring(indLast2+2,ind3);
+			lef = s.substring(ind1+1,indLast2);
+		}
+		System.out.println(lef+ " | "+rig);
 		String oper = s.substring(0,ind1);
-		String lef = s.substring((ind1+1), ind2);
-		String rig = s.substring((ind2+1), ind3);
 		
 		function p1=initFromString(lef);
-		function p2=new Polynom(rig);
-		
+		function p2=initFromString(rig);
 		return new ComplexFunction(oper,p1,p2);		
 	}
 
@@ -206,6 +234,16 @@ public class ComplexFunction implements complex_function {
 		ComplexFunction tmp = new ComplexFunction(this.p,this.left,this.right);
 		this.left=tmp;
 		this.right=f1;		
+	}
+	
+	public static boolean isBalanced(String s) {
+		int counter = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if(s.charAt(i) == '(') counter++;
+			else if(s.charAt(i) == ')') counter--;
+			if(counter < 0) return false;
+		}
+		return counter == 0;
 	}
 }
 

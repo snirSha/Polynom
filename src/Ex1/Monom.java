@@ -282,8 +282,16 @@ public class Monom implements function{
 	 * @param m = monom
 	 * @return true if the coefficient and the power are equals
 	 */
-	public boolean equals (Monom m) {
-		return Math.abs(this._coefficient - m._coefficient) <= EPSILON && this._power == m._power;
+	public boolean equals (Object m) {
+		if(m instanceof Monom) {
+			Monom tmp=(Monom)m;
+			return Math.abs(this._coefficient - tmp._coefficient) <= EPSILON && (this._power == tmp._power);
+		}
+		else if(m instanceof Polynom) {
+			return m.equals(this);
+		}
+		else
+			return false;
 	}
 
 	/**
