@@ -131,7 +131,7 @@ public class ComplexFunction implements complex_function {
 		
 		String rig="",lef="";
 		
-		if(s.charAt(ind2+2)<='z'&&s.charAt(ind2+2)>='A') {
+		if(s.charAt(ind2+2)<='z' && s.charAt(ind2+2)>='A' && s.charAt(ind2+2)!='x') {
 			rig = s.substring((ind2+2), ind3);
 			lef = s.substring(ind1+1, ind2);
 		}
