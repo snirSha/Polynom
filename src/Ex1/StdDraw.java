@@ -997,6 +997,12 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 				scaledPenRadius, scaledPenRadius));
 		draw();
 	}
+	
+	public void xyLines(Range rx, Range ry) {
+		setPenColor(Color.BLACK);
+		line(rx.get_min(), 0, rx.get_max(), 0);
+		line(0, ry.get_min(), 0, ry.get_max());
+	}
 
 	/**
 	 * Draws a circle of the specified radius, centered at (<em>x</em>, <em>y</em>).
@@ -1869,6 +1875,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 			keysDown.remove(e.getKeyCode());
 		}
 	}
+	
 
 
 
