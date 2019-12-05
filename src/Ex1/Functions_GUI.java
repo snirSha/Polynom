@@ -99,7 +99,13 @@ public class Functions_GUI implements functions{
 
 	@Override
 	public void saveToFile(String file) throws IOException {
-		// TODO Auto-generated method stub
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < list.size(); i++) {
+			sb.append(list.get(i).toString());
+			if(i + 1 < list.size())sb.append("\n");
+		}
+		String s = sb.toString();
+		FileUtils.writeFile(file, s);
 		
 	}
 
@@ -124,11 +130,11 @@ public class Functions_GUI implements functions{
 		
 		// draw x & y lines
 		for (int i = (int)rx.get_min(); i <= rx.get_max(); i++) {
-			StdDraw.setPenColor(Color.LIGHT_GRAY);
+			StdDraw.setPenColor(new Color (225, 225, 225));
 			StdDraw.line(rx.get_min(), i, rx.get_max(), i);
 		}
 		for (int i = (int)ry.get_min(); i <= ry.get_max(); i++) {
-			StdDraw.setPenColor(Color.LIGHT_GRAY);
+			StdDraw.setPenColor(new Color (225, 225, 225));
 			StdDraw.line(i, ry.get_min(), i, ry.get_max());
 		}
 		StdDraw.setPenColor(Color.BLACK);

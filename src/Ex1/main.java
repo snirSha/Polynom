@@ -1,6 +1,7 @@
 package Ex1;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -9,7 +10,7 @@ public class main {
 	public static Color[] Colors = {Color.blue, Color.cyan, Color.MAGENTA, Color.ORANGE, 
 			Color.red, Color.GREEN, Color.PINK};
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 
 		Monom m = new Monom (2, 1);
@@ -32,19 +33,22 @@ public class main {
 
 		ComplexFunction cf = new ComplexFunction("times", m, n);
 		Functions_GUI fg = new Functions_GUI();
-		fg.add(cf);
+		ComplexFunction cf1 = null;
+		cf1 = (ComplexFunction) cf.copy();
+		cf1 = (ComplexFunction) cf.copy();
+		System.out.println(cf1);
 		fg.add(m);
 		fg.add(new Polynom("3x^4 - x^3 - 2x^2 - 5"));
 		fg.add(new Polynom("-2x^3 + 5x^2 - 1.5x - 7"));	
 		fg.add(new Monom(1, 1));
 		fg.add(new Monom (1, 2));
 		fg.add(new Polynom ("x^4 - 4x^3 + 10"));
-
-		ArrayList<function> ff = new ArrayList<function>();
-		ff.addAll(fg);
+		fg.add(cf);
 		Range x = new Range(-15, 15);
 		Range y = new Range(-15, 15);
 		fg.drawFunctions(800, 600, x, y, 500);
+		System.out.println(fg);
+		fg.saveToFile("func.txt");
 
 
 

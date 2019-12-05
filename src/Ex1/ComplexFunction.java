@@ -8,29 +8,30 @@ public class ComplexFunction implements complex_function {
 	private Operation p;
 
 	public ComplexFunction(function f) {
-		this.left=f;
+		this.left = f;
+		this.p = Operation.None;
 	}
 	
 	public ComplexFunction(Operation p , function f1, function f2) {
-		if(f2!=null) {
-			this.p=p;
+		if(f2 != null) {
+			this.p = p;
 		}
-		else if(f2==null) {
+		else {
 			this.p=Operation.None;
 		}
-		this.left=f1;
-		this.right=f2;
+		this.left = f1;
+		this.right = f2;
 	}
 
 	public ComplexFunction(String str, function p1, function p2) {
-		if(p2!=null) {
+		if(p2 != null) {
 			this.p = fromStringToOperator(str);			
 		}
-		else if(p2==null) {
+		else if(p2 == null) {
 			this.p=Operation.None;
 		}
-		this.left=p1;
-		this.right=p2;
+		this.left = p1;
+		this.right = p2;
 	}
 
 	@Override
@@ -40,15 +41,16 @@ public class ComplexFunction implements complex_function {
 		
 		switch (p) {
 		case Plus:
-			ans =  this.left.f(x)+this.right.f(x);
+			ans =  this.left.f(x) + this.right.f(x);
 			break;
 
 		case Times:
-			ans =  this.left.f(x)*this.right.f(x);
+			ans = this.left.f(x) * this.right.f(x);
 			break;
 
 		case Divid:
-			ans =  this.left.f(x)/this.right.f(x);
+			if(this.right.f(x) != 0) ans =  this.left.f(x)/this.right.f(x);
+			else throw new IllegalArgumentException("Cannot divide by 0!");
 			break;
 
 		case Max:
@@ -78,7 +80,7 @@ public class ComplexFunction implements complex_function {
 	}
 
 	private Operation fromStringToOperator(String operator) {
-		String s=operator.toLowerCase();
+		String s = operator.toLowerCase();
 		
 		switch(s){
 		

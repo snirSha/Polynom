@@ -6,10 +6,10 @@ import java.io.IOException;
 
 public class FileUtils {
 
-	public static String readFile(String nameOfFile) throws IOException{ //read only from the project folder
+	public static String readFile(String fileName) throws IOException{ //read only from the project folder
 		
 		String current = new java.io.File( "." ).getCanonicalPath();
-		current += "\\" + nameOfFile;
+		current += "\\" + fileName;
 		String data = "";
 		FileInputStream inputStream = new FileInputStream(current);
 		
@@ -21,10 +21,10 @@ public class FileUtils {
 		return data;
 	}
 	
-	public static void writeFile(String nameOfFile, String data) throws IOException { //write only to project folder
+	public static void writeFile(String fileName, String data) throws IOException { //write only to project folder
 	
 		String current = new java.io.File( "." ).getCanonicalPath();
-		current += "\\" + nameOfFile;
+		current += "\\" + fileName;
 		FileOutputStream outputStream = new FileOutputStream(current);
 		outputStream.write(data.getBytes());
 		outputStream.close();
