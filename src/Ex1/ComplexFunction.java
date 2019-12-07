@@ -6,9 +6,16 @@ public class ComplexFunction implements complex_function {
 	private function left;
 	private function right;
 	private Operation p;
+	
+	public ComplexFunction() {
+		left = null;
+		right = null;
+		p = Operation.None;
+	}
 
 	public ComplexFunction(function f) {
 		this.left = f;
+		this.right = null;
 		this.p = Operation.None;
 	}
 	
@@ -17,7 +24,7 @@ public class ComplexFunction implements complex_function {
 			this.p = p;
 		}
 		else {
-			this.p=Operation.None;
+			this.p = Operation.None;
 		}
 		this.left = f1;
 		this.right = f2;
@@ -34,7 +41,6 @@ public class ComplexFunction implements complex_function {
 		this.right = p2;
 	}
 
-	@Override
 	public double f(double x) {
 		//	Plus, Times, Divid, Max, Min, Comp , None, Error
 		double ans = 0;
@@ -116,8 +122,6 @@ public class ComplexFunction implements complex_function {
 		}
 	}
 
-
-	@Override
 	public function initFromString(String s) {
 		if(!isBalanced(s))
 			throw new IllegalArgumentException("The delimiters are incorrect");
@@ -141,7 +145,6 @@ public class ComplexFunction implements complex_function {
 			rig= s.substring(indLast2+2,ind3);
 			lef = s.substring(ind1+1,indLast2);
 		}
-		System.out.println(lef+ " | "+rig);
 		String oper = s.substring(0,ind1);
 		
 		function p1=initFromString(lef);
@@ -149,64 +152,53 @@ public class ComplexFunction implements complex_function {
 		return new ComplexFunction(oper,p1,p2);		
 	}
 
-	@Override
 	public function copy() {
 		function tmp = new ComplexFunction(this.p, this.left, this.right);
 		return tmp;
 	}
 
-	@Override
 	public void plus(function f1) {
 		makeComplex(f1);
 		this.p=Operation.Plus;
 	}
 
-	@Override
 	public void mul(function f1) {
 		makeComplex(f1);
 		this.p=Operation.Times;			
 	}
 
-	@Override
 	public void div(function f1) {
 		makeComplex(f1);
 		this.p=Operation.Divid;
 	}
 
-	@Override
 	public void max(function f1) {
 		makeComplex(f1);
 		this.p=Operation.Max;
 	}
 
-	@Override
 	public void min(function f1) {
 		makeComplex(f1);
 		this.p=Operation.Min;
 	}
 
-	@Override
 	public void comp(function f1) {
 		makeComplex(f1);
 		this.p=Operation.Comp;
 	}
 
-
-	@Override
 	public function left() {
 		return this.left;
 	}
 
-	@Override
 	public function right() {
 		return this.right;
 	}
 
-	@Override
 	public Operation getOp() {
 		return this.p;
 	}
-	@Override
+
 	public String toString() {
 		StringBuilder ans = new StringBuilder();
 		ans.append(this.p+"("+this.left.toString()+" , "+this.right.toString()+")");
@@ -217,7 +209,6 @@ public class ComplexFunction implements complex_function {
 	 * Times(2x,x)==plus(x^2,x^2)
 	 * 
 	 */
-	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ComplexFunction))
 			return false;
@@ -238,7 +229,7 @@ public class ComplexFunction implements complex_function {
 		this.right=f1;		
 	}
 	
-	public static boolean isBalanced(String s) {
+	private boolean isBalanced(String s) {
 		int counter = 0;
 		for (int i = 0; i < s.length(); i++) {
 			if(s.charAt(i) == '(') counter++;

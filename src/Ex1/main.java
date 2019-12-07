@@ -35,20 +35,26 @@ public class main {
 		Functions_GUI fg = new Functions_GUI();
 		ComplexFunction cf1 = null;
 		cf1 = (ComplexFunction) cf.copy();
-		cf1 = (ComplexFunction) cf.copy();
-		System.out.println(cf1);
-		fg.add(m);
-		fg.add(new Polynom("3x^4 - x^3 - 2x^2 - 5"));
-		fg.add(new Polynom("-2x^3 + 5x^2 - 1.5x - 7"));	
-		fg.add(new Monom(1, 1));
-		fg.add(new Monom (1, 2));
-		fg.add(new Polynom ("x^4 - 4x^3 + 10"));
-		fg.add(cf);
-		Range x = new Range(-15, 15);
-		Range y = new Range(-15, 15);
-		fg.drawFunctions(800, 600, x, y, 500);
-		System.out.println(fg);
-		fg.saveToFile("func.txt");
+//		System.out.println(cf1);
+		function cf2 = new ComplexFunction();
+		cf2 = cf1.initFromString(n.toString());
+//		System.out.println(cf1);
+//		fg.add(m);
+//		fg.add(new Polynom("3x^4 - x^3 - 2x^2 - 5"));
+//		fg.add(new Polynom("-2x^3 + 5x^2 - 1.5x - 7"));	
+//		fg.add(new Monom(1, 1));
+//		fg.add(new Monom (1, 2));
+//		fg.add(new Polynom ("x^4 - 4x^3 + 10"));
+//		fg.add(cf);
+//		Range x = new Range(-15, 15);
+//		Range y = new Range(-15, 15);
+//		fg.drawFunctions(800, 600, x, y, 500);
+//		System.out.println(fg);
+//		fg.saveToFile("func.txt");
+		Functions_GUI fg1 = new Functions_GUI();
+		fg1.initFromFile("func.txt");
+		System.out.println(fg1);
+		
 
 
 

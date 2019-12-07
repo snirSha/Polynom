@@ -1,8 +1,12 @@
 package Ex1;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -84,20 +88,23 @@ public class Functions_GUI implements functions{
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < this.size(); i++) {
+		for (int i = 0; i < this.list.size(); i++) {
 			sb.append(this.list.get(i).toString());
-			if(i < size() - 1) sb.append(", ");
+			if(i < size() - 1) sb.append("\n");
 		}
 		return sb.toString();
 	}
 
-	@Override
 	public void initFromFile(String file) throws IOException {
-		// TODO Auto-generated method stub
-		
+		String s = FileUtils.readFile(file);
+		String [] str = s.split("\n");
+		for (int i = 0; i < str.length; i++) {
+			function cf2 = new ComplexFunction();
+			cf2 = cf2.initFromString(str[i]);
+			add(cf2);
+		}
 	}
 
-	@Override
 	public void saveToFile(String file) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < list.size(); i++) {
@@ -109,7 +116,6 @@ public class Functions_GUI implements functions{
 		
 	}
 
-	@Override
 	public void drawFunctions(int width, int height, Range rx, Range ry, int res) {
 		int n = res;
 		StdDraw.setCanvasSize(width, height);
@@ -164,7 +170,6 @@ public class Functions_GUI implements functions{
 		}	
 	}
 
-	@Override
 	public void drawFunctions(String json_file) {
 		// TODO Auto-generated method stub
 		

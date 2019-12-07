@@ -10,15 +10,15 @@ public class FileUtils {
 		
 		String current = new java.io.File( "." ).getCanonicalPath();
 		current += "\\" + fileName;
-		String data = "";
+		StringBuilder data = new StringBuilder();
 		FileInputStream inputStream = new FileInputStream(current);
 		
 		int c;
 		while ((c = inputStream.read()) != -1) {
-			data += (char)c;
+			data.append((char)c);
 		}
 		inputStream.close();
-		return data;
+		return data.toString();
 	}
 	
 	public static void writeFile(String fileName, String data) throws IOException { //write only to project folder
