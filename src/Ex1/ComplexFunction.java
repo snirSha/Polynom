@@ -200,8 +200,18 @@ public class ComplexFunction implements complex_function {
 	}
 
 	public String toString() {
+//		StringBuilder ans = new StringBuilder();
+//		ans.append(this.p+"("+this.left.toString()+" , "+this.right.toString()+")");
+//		return ans.toString();
+		
 		StringBuilder ans = new StringBuilder();
-		ans.append(this.p+"("+this.left.toString()+" , "+this.right.toString()+")");
+		if(this.p == Operation.None) {
+			ans.append(left.toString());
+		}else {
+			ans.append(this.p + "(" + this.left.toString() 
+						+ " , " + this.right.toString() + ")");
+		}
+		
 		return ans.toString();
 	}
 

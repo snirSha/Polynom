@@ -10,13 +10,13 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class Functions_GUI implements functions{
-	
+
 	public static Color[] Colors = {Color.blue, Color.cyan, Color.MAGENTA, Color.ORANGE, 
 			Color.red, Color.GREEN, Color.PINK};
 
 	public ArrayList<function> list = new ArrayList<function>();
 
-	
+
 	public boolean add(function e) {
 		if(contains(e))return false;
 		return this.list.add(e);
@@ -29,7 +29,7 @@ public class Functions_GUI implements functions{
 	public void clear() {
 		this.list.clear();
 	}
-	
+
 	public boolean contains(Object o) {
 		return this.list.contains(o);
 	}
@@ -69,35 +69,40 @@ public class Functions_GUI implements functions{
 	public <T> T[] toArray(T[] a) {
 		return this.list.toArray(a);
 	}
-	
+
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < this.list.size(); i++) {
-			sb.append(this.list.get(i).toString());
-			if(i < size() - 1) sb.append("\n");
+//		StringBuilder sb = new StringBuilder();
+//		for (int i = 0; i < size(); i++) {
+//			sb.append(this.list.get(i).toString());
+//			if(i < size() - 1) sb.append("\n");
+//		}
+//		return sb.toString();
+		String ans = "";
+		for (int i = 0; i < size(); i++) {
+			ans += this.list.get(i).toString();
+			if(i + 1 < size()) ans += "\n";
 		}
-		return sb.toString();
+		return ans;
 	}
 
 	public void initFromFile(String file) throws IOException {
-		String s = FileUtils.readFile(file);
-		String [] str = s.split("\n");
-		for (int i = 0; i < str.length; i++) {
-			function cf2 = new ComplexFunction();
-			cf2 = cf2.initFromString(str[i]);
-			add(cf2);
+		try {
+			String s = FileUtils.readFile(file);
+			String [] str = s.split("\n");
+			for (int i = 0; i < str.length; i++) {
+				function cf2 = new ComplexFunction();
+				cf2 = cf2.initFromString(str[i]);
+				add(cf2);
+			}
+		}catch(Exception e) {
+			throw new IOException("Can not read file"); 
 		}
 	}
 
 	public void saveToFile(String file) throws IOException {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < list.size(); i++) {
-			sb.append(list.get(i).toString());
-			if(i + 1 < list.size())sb.append("\n");
-		}
-		String s = sb.toString();
-		FileUtils.writeFile(file, s);
-		
+
+		FileUtils.writeFile(file, toString());
+
 	}
 
 	public void drawFunctions(int width, int height, Range rx, Range ry, int res) {
@@ -117,7 +122,7 @@ public class Functions_GUI implements functions{
 		}
 		StdDraw.setXscale(rx.get_min(), rx.get_max());
 		StdDraw.setYscale(ry.get_min(), ry.get_max());
-		
+
 		// draw x & y lines
 		StdDraw.setPenColor(new Color (225, 225, 225));//Draw gray lines
 		for (int i = (int)rx.get_min() * 2; i <= rx.get_max() * 2; i++) {
@@ -163,28 +168,28 @@ public class Functions_GUI implements functions{
 			Range ry = new Range(gp.Range_Y[0], gp.Range_Y[1]);
 			if(gp.Resolution < 1 || gp.Range_X[0] >= gp.Range_X[1] 
 					|| gp.Range_Y[0] >= gp.Range_Y[1] 
-					|| gp.Width <= 0 || gp.Height <= 0) {
+							|| gp.Width <= 0 || gp.Height <= 0) {
 				throw new IOException(); 
 			}
 			drawFunctions(gp.Width, gp.Height, rx, ry, gp.Resolution);
-			
+
 		} catch (IOException e) {
 			System.out.println("File is not readable or include wrong values, init with default values.");
 			Range rx = new Range(-15, 15);
 			Range ry = new Range(-15, 15);
 			drawFunctions(800, 600, rx, ry, 500);
 		}
-		
-		
+
+
 	}
-	
+
 	public class GUI_params {
 		int Width;
 		int Height;
 		int Resolution;
 		double [] Range_X;
 		double [] Range_Y;
-		
+
 		//800, 600, x, y, 500
 
 
@@ -194,12 +199,12 @@ public class Functions_GUI implements functions{
 					+ Resolution + "\nRange_X: " + Arrays.toString(Range_X)
 					+ "\nRange_Y: " + Arrays.toString(Range_Y));
 			return sb.toString();
-			
+
 		}
-		
+
 	}
 
-	
 
-	
+
+
 }
