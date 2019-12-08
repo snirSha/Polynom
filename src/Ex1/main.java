@@ -23,14 +23,14 @@ public class main {
 		Polynom p = new Polynom("3x^2 - 5x + 4");
 		Polynom p1 = new Polynom("x^3 - x^2 + x -1");
 
-		ComplexFunction [] arr = new ComplexFunction[6];
-		arr[0] = new ComplexFunction("times", m, n);
-		arr[1] = new ComplexFunction("divid", arr[0], p);
-		arr[2] = new ComplexFunction(m);
-		arr[3] = new ComplexFunction(p);
-		arr[4] = new ComplexFunction("plus", p1, n);
-		arr[5] = new ComplexFunction(new Polynom("4"));
-//		arr[6] = new ComplexFunction("divid", arr[4], arr[0]);
+		ComplexFunction [] arr = new ComplexFunction[7];
+		arr[0] = new ComplexFunction("times", m, n);//Times(2x,3x^2)
+		arr[1] = new ComplexFunction("divid", arr[0], p);//Divid(Times(2x,3x^2),3x^2 - 5x + 4)
+		arr[2] = new ComplexFunction(m);//None(2x,NULL)
+		arr[3] = new ComplexFunction(p);//None(3x^2 - 5x + 4,NULL)
+		arr[4] = new ComplexFunction("plus", p1, n);//Plus(x^3 - x^2 + x -1,3x^2)
+		arr[5] = new ComplexFunction(new Polynom("4"));//None(4,NULL)
+		arr[6] = new ComplexFunction("divid", arr[4], arr[0]);//Divid(Plus(x^3 - x^2 + x -1,3x^2) , Times(2x,3x^2))
 		Functions_GUI fg = new Functions_GUI();
 
 		for (int i = 0; i < arr.length; i++) {
@@ -43,7 +43,9 @@ public class main {
 		fg1.initFromFile("func2.txt");
 		fg1.drawFunctions("params.txt");
 
+
 	}
+		
 
 
 }

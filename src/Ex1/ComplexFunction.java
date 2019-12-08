@@ -122,7 +122,7 @@ public class ComplexFunction implements complex_function {
 		}
 	}
 
-	public function initFromString(String s) {
+	public function initFromString(String s) {//snir
 		if(!isBalanced(s))
 			throw new IllegalArgumentException("The delimiters are incorrect");
 
@@ -131,20 +131,11 @@ public class ComplexFunction implements complex_function {
 			 return f;
 		}
 		int ind1 = s.indexOf('(');
-		int ind2 = s.indexOf(',');
-		int indLast2=s.lastIndexOf(','); 
+		int ind2 = findTheRightComma(s); 
 		int ind3 = s.lastIndexOf(')');
 		
-		String rig="",lef="";
-		
-		if(s.charAt(ind2+2)<='z' && s.charAt(ind2+2)>='A' && s.charAt(ind2+2)!='x') {
-			rig = s.substring((ind2+2), ind3);
-			lef = s.substring(ind1+1, ind2);
-		}
-		else {
-			rig= s.substring(indLast2+2,ind3);
-			lef = s.substring(ind1+1,indLast2);
-		}
+		String rig= s.substring(ind2+2,ind3);
+		String lef = s.substring(ind1+1,ind2);
 		String oper = s.substring(0,ind1);
 		
 		function p1=initFromString(lef);
@@ -248,6 +239,24 @@ public class ComplexFunction implements complex_function {
 		}
 		return counter == 0;
 	}
+	
+	private int findTheRightComma(String s) {
+		int counter=0,i=0;
+		for (; i < s.length() && s.charAt(i)!=')' && s.charAt(i+1)!=','; i++) {
+			if(s.charAt(i)=='(')
+				counter++;
+		}
+
+		for (; i < s.length() && counter!=1; i++) {
+			if(s.charAt(i)==')')
+				counter--;
+			if(s.charAt(i)=='(')
+				counter++;
+		}
+
+		return i+1;
+	}
+
 }
 
 

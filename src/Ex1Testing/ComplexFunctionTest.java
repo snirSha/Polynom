@@ -172,6 +172,27 @@ class ComplexFunctionTest {
 		assertEquals(co.f(1),cf.f(1));
 	}
 	
-	
+	@Test
+	void ourTest5() throws Exception{
+		System.out.println("\nlast TEST: ");
+		Polynom p1=new Polynom("x^3 - x^2 + x - 1.0");
+		Polynom p2=new Polynom("3.0x^2");
+		Monom m1=new Monom("2.0x");
+		Monom m2=new Monom("3.0x^2");
+		ComplexFunction c1=new ComplexFunction("plus",p1,p2);
+		ComplexFunction c2=new ComplexFunction("mul",m1,m2);
+		System.out.println(c1);
+		System.out.println(c2);
+		ComplexFunction cc=new ComplexFunction("divid",c1,c2);
+		System.out.println(cc);
+		String s=cc.toString();
+		function f=cc.initFromString(s);
+		System.out.println(f);
+		
+		ComplexFunction tt=new ComplexFunction("max",cc,c1);
+		System.out.println(tt);
+		
+		assertEquals(tt.f(1),3.0);
+	}
 	
 }
