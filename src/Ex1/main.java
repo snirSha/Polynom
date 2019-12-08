@@ -2,10 +2,14 @@ package Ex1;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.util.ArrayList;
+import com.google.gson.Gson;
+
+import Ex1.Functions_GUI.GUI_params;
 
 
 public class main {
+	
+	
 
 	public static Color[] Colors = {Color.blue, Color.cyan, Color.MAGENTA, Color.ORANGE, 
 			Color.red, Color.GREEN, Color.PINK};
@@ -36,8 +40,8 @@ public class main {
 		ComplexFunction cf1 = null;
 		cf1 = (ComplexFunction) cf.copy();
 //		System.out.println(cf1);
-		function cf2 = new ComplexFunction();
-		cf2 = cf1.initFromString(n.toString());
+//		function cf2 = new ComplexFunction();
+//		cf2 = cf1.initFromString(n.toString());
 //		System.out.println(cf1);
 //		fg.add(m);
 //		fg.add(new Polynom("3x^4 - x^3 - 2x^2 - 5"));
@@ -53,10 +57,13 @@ public class main {
 //		fg.saveToFile("func.txt");
 		Functions_GUI fg1 = new Functions_GUI();
 		fg1.initFromFile("func.txt");
-		System.out.println(fg1);
+		fg1.drawFunctions("params.txt");
+		
+
 		
 
 
-
 	}
+	
+
 }
