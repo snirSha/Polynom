@@ -18,7 +18,6 @@ public class Functions_GUI implements functions{
 
 
 	public boolean add(function e) {
-		if(contains(e))return false;
 		return this.list.add(e);
 	}
 

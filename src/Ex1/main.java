@@ -41,7 +41,7 @@ public class main {
 		fg.saveToFile("func2.txt");
 		Functions_GUI fg1 = new Functions_GUI();
 		fg1.initFromFile("func2.txt");
-		fg1.drawFunctions("params.txt");
+		fg1.drawFunctions("GUI_params.txt");
 
 
 	}
