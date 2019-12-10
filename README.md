@@ -21,3 +21,16 @@ There are four main classes:
 Operations in our class: Plus (+), Mult (*), Div (/), Max, Min, Comp (f(g(x))), None (only left function), Error.
 
 * Functions_GUI - This class reads a file of functions and makes them a drawing of functions in a graph.
+
+
+## Sources:
+
+* https://en.wikipedia.org/wiki/Riemann_integral
+
+* https://docs.oracle.com/javase/7/docs/api/java/util/Iterator.html
+
+* https://www.geeksforgeeks.org
+
+* https://stackoverflow.com
+
+* https://github.com https://www.java-forums.org
