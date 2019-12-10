@@ -8,10 +8,10 @@ public class FileUtils {
 
 	public static String readFile(String fileName) throws IOException{ //read only from the project folder
 		
-		String current = new java.io.File( "." ).getCanonicalPath();
-		current += "\\" + fileName;
+//		String current = new java.io.File( "." ).getCanonicalPath();
+//		current += "\\" + fileName;
 		StringBuilder data = new StringBuilder();
-		FileInputStream inputStream = new FileInputStream(current);
+		FileInputStream inputStream = new FileInputStream(fileName);
 		
 		int c;
 		while ((c = inputStream.read()) != -1) {
@@ -23,9 +23,9 @@ public class FileUtils {
 	
 	public static void writeFile(String fileName, String data) throws IOException { //write only to project folder
 	
-		String current = new java.io.File( "." ).getCanonicalPath();
-		current += "\\" + fileName;
-		FileOutputStream outputStream = new FileOutputStream(current);
+//		String current = new java.io.File( "." ).getCanonicalPath();
+//		current += "\\" + fileName;
+		FileOutputStream outputStream = new FileOutputStream(fileName);
 		outputStream.write(data.getBytes());
 		outputStream.close();
 	}

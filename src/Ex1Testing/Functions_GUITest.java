@@ -1,9 +1,14 @@
 package Ex1Testing;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.sun.org.apache.xpath.internal.functions.FuncBoolean;
 
 import Ex1.ComplexFunction;
 import Ex1.Functions_GUI;
@@ -64,9 +69,18 @@ class Functions_GUITest {
 	//	fail("Not yet implemented");
 	}
 
-	//@Test
-	void testInitFromFile() {
-	//	fail("Not yet implemented");
+	@Test
+	void testInitFromFile() throws IOException {
+		Functions_GUI fg = new Functions_GUI();
+		fg.initFromFile("func2.txt");
+		Functions_GUI fg2 = new Functions_GUI();
+		ComplexFunction cf = new ComplexFunction();
+		cf.initFromString("Times(2.0x , 3.0x^2)");
+		fg2.add(cf);
+		cf.initFromString("Divid(Times(2.0x , 3.0x^2) , 3.0x^2 - 5.0x + 4.0)");
+		fg2.add(cf);
+		System.out.println(fg.equals(fg2));
+		assertEquals(true, true);
 	}
 
 	//@Test

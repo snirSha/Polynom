@@ -18,7 +18,13 @@ public class Functions_GUI implements functions{
 
 
 	public boolean add(function e) {
-		return this.list.add(e);
+		try {
+			return this.list.add(e);
+		}catch(Exception err) {
+			System.out.println("could not add non function type");
+			return false;
+		}
+		
 	}
 
 	public boolean addAll(Collection<? extends function> c) {
@@ -104,6 +110,7 @@ public class Functions_GUI implements functions{
 
 	}
 
+
 	public void drawFunctions(int width, int height, Range rx, Range ry, int res) {
 		int n = res;
 		StdDraw.setCanvasSize(width, height);
@@ -150,7 +157,7 @@ public class Functions_GUI implements functions{
 		for(int a = 0; a < size; a++) {
 			int c = a % Colors.length;
 			StdDraw.setPenColor(Colors[c]);
-			System.out.println(a + ") " + Colors[a] + "  f(x)= " + this.list.get(a));
+			System.out.println(a + ") " + Colors[a % Colors.length] + "  f(x)= " + this.list.get(a));
 			for (int i = 0; i < n; i++) {
 				StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
 			}
@@ -161,7 +168,6 @@ public class Functions_GUI implements functions{
 		try {
 			String s = FileUtils.readFile(json_file);
 			Gson gson = new Gson();
-			//gson.fromJson(s, GUI_params.class);
 			GUI_params gp = gson.fromJson(s, GUI_params.class);
 			Range rx = new Range(gp.Range_X[0], gp.Range_X[1]);
 			Range ry = new Range(gp.Range_Y[0], gp.Range_Y[1]);
