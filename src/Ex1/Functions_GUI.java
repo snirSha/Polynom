@@ -167,7 +167,7 @@ public class Functions_GUI implements functions{
 					throw new IOException(); 
 				}
 				drawFunctions(gp.Width, gp.Height, rx, ry, gp.Resolution);
-			}catch(Exception e){
+			}catch(Exception e){ 
 				System.out.println("File is not readable or include wrong values, init with default values.");
 				Range rx = new Range(-15, 15);
 				Range ry = new Range(-15, 15);
