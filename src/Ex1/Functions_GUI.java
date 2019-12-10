@@ -157,15 +157,22 @@ public class Functions_GUI implements functions{
 		try {
 			String s = FileUtils.readFile(json_file);
 			Gson gson = new Gson();
-			GUI_params gp = gson.fromJson(s, GUI_params.class);
-			Range rx = new Range(gp.Range_X[0], gp.Range_X[1]);
-			Range ry = new Range(gp.Range_Y[0], gp.Range_Y[1]);
-			if(gp.Resolution < 1 || gp.Range_X[0] >= gp.Range_X[1] 
-					|| gp.Range_Y[0] >= gp.Range_Y[1] 
-							|| gp.Width <= 0 || gp.Height <= 0) {
-				throw new IOException(); 
+			try {
+				GUI_params gp = gson.fromJson(s, GUI_params.class);
+				Range rx = new Range(gp.Range_X[0], gp.Range_X[1]);
+				Range ry = new Range(gp.Range_Y[0], gp.Range_Y[1]);
+				if(gp.Resolution < 1 || gp.Range_X[0] >= gp.Range_X[1] 
+						|| gp.Range_Y[0] >= gp.Range_Y[1] 
+								|| gp.Width <= 0 || gp.Height <= 0) {
+					throw new IOException(); 
+				}
+				drawFunctions(gp.Width, gp.Height, rx, ry, gp.Resolution);
+			}catch(Exception e){ 
+				System.out.println("File is not readable or include wrong values, init with default values.");
+				Range rx = new Range(-15, 15);
+				Range ry = new Range(-15, 15);
+				drawFunctions(800, 600, rx, ry, 500);
 			}
-			drawFunctions(gp.Width, gp.Height, rx, ry, gp.Resolution);
 		} catch (IOException e) {
 			System.out.println("File is not readable or include wrong values, init with default values.");
 			Range rx = new Range(-15, 15);
