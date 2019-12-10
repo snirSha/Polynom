@@ -1,14 +1,14 @@
 package Ex1Testing;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.sun.org.apache.xpath.internal.functions.FuncBoolean;
 
 import Ex1.ComplexFunction;
 import Ex1.Functions_GUI;
@@ -55,6 +55,8 @@ class Functions_GUITest {
 		data.drawFunctions(JSON_param_file);
 	}
 	private functions _data=null;
+	
+	private functions clark=null;
 //	@BeforeAll
 //	static void setUpBeforeClass() throws Exception {
 //	}
@@ -64,42 +66,53 @@ class Functions_GUITest {
 		_data = FunctionsFactory();
 	}
 
-	//@Test
-	void testFunctions_GUI() {
-	//	fail("Not yet implemented");
+	@Test
+	void testFunctions_GUI() throws Exception {
+		clark = new Functions_GUI();
+		Polynom p1=new Polynom("x^2 + 5.6");
+		Polynom p2=new Polynom("x^4 - 2x");
+		Monom m=new Monom("1");
+		ComplexFunction c=new ComplexFunction("plus",p1,p2);
+		c.mul(m);
+		clark.add(c);
+		if(!clark.contains(c))	
+			fail("ERR: should contains");
+		clark.clear();
+		if(!clark.isEmpty())
+			fail("Err: should not contains anything");
+		
+		ComplexFunction cc=new ComplexFunction("times",p1,c);
+		clark.add(cc);
+		clark.add(c);
+		assertEquals(clark.size(),2);
 	}
 
 	@Test
-	void testInitFromFile() throws IOException {
-		Functions_GUI fg = new Functions_GUI();
-		fg.initFromFile("func2.txt");
-		Functions_GUI fg2 = new Functions_GUI();
-		ComplexFunction cf = new ComplexFunction();
-		cf.initFromString("Times(2.0x , 3.0x^2)");
-		fg2.add(cf);
-		cf.initFromString("Divid(Times(2.0x , 3.0x^2) , 3.0x^2 - 5.0x + 4.0)");
-		fg2.add(cf);
-		System.out.println(fg.equals(fg2));
-		assertEquals(true, true);
+	void testInitFromFileAndSaveToFile() throws IOException {
+		clark=new Functions_GUI();
+		String ss="snir&omer.txt";
+		_data.saveToFile(ss);
+		clark.initFromFile(ss);
+		
+		Object[] arr=clark.toArray();
+		Object[] arr2=_data.toArray();
+		for (int i = 0; i < arr.length; i++) {
+			assertEquals(arr[i].toString().compareTo(arr2[i].toString()),0);
+		}
 	}
 
-	//@Test
-	void testSaveToFile() {
-		
-		
-	}
-
-	//@Test
+	@Test
 	void testDrawFunctions() {
-		//_data.drawFunctions();
-	//	fail("Not yet implemented");
+		String s="GUI_params.txt";
+		_data.drawFunctions(s);
 	}
 
 	@Test
 	void testDrawFunctionsIntIntRangeRangeInt() {
-		_data.drawFunctions("GUI_params.txt");
-		//fail("Not yet implemented");
+		Range xy=new Range(-10,10);
+		_data.drawFunctions(500,500,xy,xy,150);
 	}
+	
 	public static functions FunctionsFactory() throws Exception {
 		functions ans = new Functions_GUI();
 		String s1 = "3.1 +2.4x^2 -x^4";
