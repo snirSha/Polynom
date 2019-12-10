@@ -8,14 +8,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
-
+/**
+ * 
+ * @author Omer Kalif & Snir Sharabani
+ *
+ */
 public class Functions_GUI implements functions{
-
+	/**
+	 * Colors is the array of colors that we use to draw each function in other color
+	 */
 	public static Color[] Colors = {Color.blue, Color.cyan, Color.MAGENTA, Color.ORANGE, 
 			Color.red, Color.GREEN, Color.PINK};
-
+	/**
+	 * @list is the collection of the functions
+	 */
 	public ArrayList<function> list = new ArrayList<function>();
-
+	/**
+	 * add function to the list
+	 */
 	public boolean add(function e) {
 		try {
 			return this.list.add(e);
@@ -24,47 +34,69 @@ public class Functions_GUI implements functions{
 			return false;
 		}	
 	}
-
+	/**
+	 * add collection of functions to the list
+	 */
 	public boolean addAll(Collection<? extends function> c) {
 		return this.list.addAll(c);
 	}
-
+	/**
+	 * delete all the functions from the list
+	 */
 	public void clear() {
 		this.list.clear();
 	}
-
+	/**
+	 * check if an object is in the list
+	 */
 	public boolean contains(Object o) {
 		return this.list.contains(o);
 	}
-
+	/**
+	 * check if a collection is contained in the list
+	 */
 	public boolean containsAll(Collection<?> c) {
 		return this.list.containsAll(c);
 	}
-
+	/**
+	 * check if the list is empty
+	 */
 	public boolean isEmpty() {
 		return this.list.isEmpty();
 	}
-
+	/**
+	 * return an iterator of the type function
+	 */
 	public Iterator<function> iterator() {
 		return this.list.iterator();
 	}
-
+	/**
+	 * remove an object from the list
+	 */
 	public boolean remove(Object o) {
 		return this.list.remove(o);
 	}
-
+	/**
+	 * remove a collection from the list
+	 */
 	public boolean removeAll(Collection<?> c) {
 		return this.list.removeAll(c);
 	}
-
+	/**
+	 * retain the list with a collection
+	 */
 	public boolean retainAll(Collection<?> c) {
 		return this.list.retainAll(c);
 	}
-
+	/**
+	 * return the size of the collection
+	 */
 	public int size() {
 		return this.list.size();
 	}
-
+	/**
+	 * return an array of the functions in the list
+	 */
 	public Object[] toArray() {
 		return this.list.toArray();
 	}
@@ -72,7 +104,7 @@ public class Functions_GUI implements functions{
 	public <T> T[] toArray(T[] a) {
 		return this.list.toArray(a);
 	}
-
+	
 	public String toString() {
 		String ans = "";
 		for (int i = 0; i < size(); i++) {
@@ -81,7 +113,9 @@ public class Functions_GUI implements functions{
 		}
 		return ans;
 	}
-
+	/**
+	 * read a text file of functions and initialize a collection of those functions
+	 */
 	public void initFromFile(String file) throws IOException {
 		try {
 			String s = FileUtils.readFile(file);
@@ -95,11 +129,15 @@ public class Functions_GUI implements functions{
 			throw new IOException("Can not read file"); 
 		}
 	}
-
+	/**
+	 * save the collection in a text file
+	 */
 	public void saveToFile(String file) throws IOException {
 		FileUtils.writeFile(file, toString());
 	}
-
+	/**
+	 * draw the functions in a java window by given parameters
+	 */
 	public void drawFunctions(int width, int height, Range rx, Range ry, int res) {
 		int n = res;
 		StdDraw.setCanvasSize(width, height);
@@ -152,7 +190,9 @@ public class Functions_GUI implements functions{
 			}
 		}
 	}
-
+	/**
+	 * draw all the lists functions by parameters from the json file
+	 */
 	public void drawFunctions(String json_file) {
 		try {
 			String s = FileUtils.readFile(json_file);
@@ -180,8 +220,12 @@ public class Functions_GUI implements functions{
 			drawFunctions(800, 600, rx, ry, 500);
 		}
 	}
-
-	public class GUI_params {
+	/**
+	 * 
+	 * class for the json file
+	 *
+	 */
+	public class GUI_params { 
 		int Width;
 		int Height;
 		int Resolution;
