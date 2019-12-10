@@ -13,10 +13,10 @@ Omer Kalif 311123780
 
 There are four main classes:
 
-*Monom class - Represents a simple "Monom" of form ax^b, where a is a real number and b is an integer (summed a none negative).
+* Monom class - Represents a simple "Monom" of form ax^b, where a is a real number and b is an integer (summed a none negative).
 
-*Polynom class – Represents a simple “Polynom” of shape a1x^b1 + a2x^b2 + ……+ anx^bn. Where a1,...an are real numbers and b1,…bn are integers.
+* Polynom class – Represents a simple “Polynom” of shape a1x^b1 + a2x^b2 + ……+ anx^bn. Where a1,...an are real numbers and b1,…bn are integers.
 
-*ComplexFunction - This class consists of three parts, two function (left and right), and operation that connects them. function of type y=f(x), where both y and x are real numbers Operations in our class: Plus (+), Mult (*), Div (/), Max, Min, Comp (f(g(x))), None (only left function), Error.
+* ComplexFunction - This class consists of three parts, two function (left and right), and operation that connects them. function of type y=f(x), where both y and x are real numbers Operations in our class: Plus (+), Mult (*), Div (/), Max, Min, Comp (f(g(x))), None (only left function), Error.
 
-*Functions_GUI - This class reads a file of functions and makes them a drawing of functions in a graph.
+* Functions_GUI - This class reads a file of functions and makes them a drawing of functions in a graph.
