@@ -2,9 +2,9 @@
 
 ## Authors
 
-Snir Shaharabani 204040687
+Snir Shaharabani 
 
-Omer Kalif 311123780
+Omer Kalif 
 
 
 
