@@ -22,6 +22,7 @@ public class main {
 		Monom n = new Monom (3, 2);
 		Polynom p = new Polynom("3x^2 - 5x + 4");
 		Polynom p1 = new Polynom("x^3 - x^2 + x -1");
+		
 
 		function [] arr = new function[9];
 		arr[0] = new ComplexFunction("times", m, n);//Times(2x,3x^2)
