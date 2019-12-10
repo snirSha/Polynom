@@ -16,15 +16,13 @@ public class Functions_GUI implements functions{
 
 	public ArrayList<function> list = new ArrayList<function>();
 
-
 	public boolean add(function e) {
 		try {
 			return this.list.add(e);
 		}catch(Exception err) {
 			System.out.println("could not add non function type");
 			return false;
-		}
-		
+		}	
 	}
 
 	public boolean addAll(Collection<? extends function> c) {
@@ -76,12 +74,6 @@ public class Functions_GUI implements functions{
 	}
 
 	public String toString() {
-//		StringBuilder sb = new StringBuilder();
-//		for (int i = 0; i < size(); i++) {
-//			sb.append(this.list.get(i).toString());
-//			if(i < size() - 1) sb.append("\n");
-//		}
-//		return sb.toString();
 		String ans = "";
 		for (int i = 0; i < size(); i++) {
 			ans += this.list.get(i).toString();
@@ -105,11 +97,8 @@ public class Functions_GUI implements functions{
 	}
 
 	public void saveToFile(String file) throws IOException {
-
 		FileUtils.writeFile(file, toString());
-
 	}
-
 
 	public void drawFunctions(int width, int height, Range rx, Range ry, int res) {
 		int n = res;
@@ -161,7 +150,7 @@ public class Functions_GUI implements functions{
 			for (int i = 0; i < n; i++) {
 				StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
 			}
-		}	
+		}
 	}
 
 	public void drawFunctions(String json_file) {
@@ -177,15 +166,12 @@ public class Functions_GUI implements functions{
 				throw new IOException(); 
 			}
 			drawFunctions(gp.Width, gp.Height, rx, ry, gp.Resolution);
-
 		} catch (IOException e) {
 			System.out.println("File is not readable or include wrong values, init with default values.");
 			Range rx = new Range(-15, 15);
 			Range ry = new Range(-15, 15);
 			drawFunctions(800, 600, rx, ry, 500);
 		}
-
-
 	}
 
 	public class GUI_params {
@@ -195,21 +181,12 @@ public class Functions_GUI implements functions{
 		double [] Range_X;
 		double [] Range_Y;
 
-		//800, 600, x, y, 500
-
-
 		public String toString() {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Width: " + Width + "\nHeight: " + Height + "\nResolution: " 
 					+ Resolution + "\nRange_X: " + Arrays.toString(Range_X)
 					+ "\nRange_Y: " + Arrays.toString(Range_Y));
 			return sb.toString();
-
 		}
-
 	}
-
-
-
-
 }
