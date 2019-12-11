@@ -39,7 +39,7 @@ class ComplexFunctionTest {
 	}
 
 		@Test
-		void testOfString() {
+		void testToString() {
 			Polynom p1 = new Polynom();
 			p1.add( new Monom(2,2));//2x^2
 			Polynom p2 = new Polynom();
@@ -87,8 +87,6 @@ class ComplexFunctionTest {
 			double d5 = cf5.f(x);
 			assertEquals(d,d5,EPS);
 		}
-		//System.out.println(cf4);
-		//System.out.println(cf5);
 	}
 	
 	@Test
@@ -105,11 +103,11 @@ class ComplexFunctionTest {
 
 		System.out.println(t4);
 		String y=t4.toString();
-		function gg=t4.initFromString(y);
+		function fg=t4.initFromString(y);
 	
-		System.out.println(gg+" == "+t4);
-		if(!t4.equals(gg)) {
-			fail("ERR: "+t4+" should be equals to "+gg);
+		System.out.println(fg+" == "+t4);
+		if(!t4.equals(fg)) {
+			fail("ERR: "+t4+" should be equals to "+fg);
 		}
 	}
 	

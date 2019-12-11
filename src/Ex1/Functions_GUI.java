@@ -149,7 +149,11 @@ public class Functions_GUI implements functions{
 		for (int i=0; i<=n; i++) {
 			x[i] = x0;
 			for(int a=0;a<size;a++) {
+				try {
 				yy[a][i] = this.list.get(a).f(x[i]);
+				}catch(Exception e) {
+					continue;
+				}
 			}
 			x0+=x_step;
 		}

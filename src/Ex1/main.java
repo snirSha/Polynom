@@ -14,7 +14,7 @@ public class main {
 	public static Color[] Colors = {Color.blue, Color.cyan, Color.MAGENTA, Color.ORANGE, 
 			Color.red, Color.GREEN, Color.PINK};
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 
 
 		Monom m = new Monom (2, 1);
@@ -22,8 +22,8 @@ public class main {
 		Monom n = new Monom (3, 2);
 		Polynom p = new Polynom("3x^2 - 5x + 4");
 		Polynom p1 = new Polynom("x^3 - x^2 + x -1");
-		
-
+		Monom zero=new Monom("0");
+		ComplexFunction cf34 = new ComplexFunction(Operation.Divid, new Monom(4, 0), zero);
 		function [] arr = new function[9];
 		arr[0] = new ComplexFunction("times", m, n);//Times(2x,3x^2)
 		arr[1] = new ComplexFunction("divid", arr[0], p);//Divid(Times(2x,3x^2),3x^2 - 5x + 4)
@@ -46,12 +46,15 @@ public class main {
 		f = new ComplexFunction();
 		f = f.initFromString("Times(2x , 1)");
 		fg.add(f);
-		
+		fg.add(cf34);
+		Functions_GUI fg34 = new Functions_GUI();
+		fg34.add(cf34);
+		fg34.add(f);
 		fg.saveToFile("func2.txt");
 		Functions_GUI fg1 = new Functions_GUI();
 		fg1.initFromFile("func2.txt");
-		fg1.drawFunctions("GUI_params.txt");
-
+	//	fg1.drawFunctions("GUI_params.txt");
+		fg34.drawFunctions("GUI_params.txt");
 
 	}
 		
